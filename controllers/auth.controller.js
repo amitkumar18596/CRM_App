@@ -21,6 +21,7 @@ const bcrypt = require('bcrypt')
 const User = require('../models/user.model')
 const jwt = require ('jsonwebtoken')
 const authConfig = require('../configs/auth.config')
+const constants = require('../utils/constant')
 
 /*
 Logic to accept the registation login/sign up
@@ -31,8 +32,8 @@ res -> what we retrn from server
 
 exports.signup = async (req, res)=>{
     // I need to read data from the request body
-    if(req.body.userType != 'CUSTOMER'){
-        req.body.userStatus = 'PENDING'
+    if(req.body.userType != constants.userTypes.customer){
+        req.body.userStatus = constants.userStatus.pending
     }
 
     // convert that into JS object for inserting mongo DB

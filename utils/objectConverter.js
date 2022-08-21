@@ -5,7 +5,7 @@ exports.userResponse = (users) =>{
             name : user.name,
             userid : user.userId,
             email : user.email,
-            userTypes : user.userTypes,
+            userTypes : user.userType,
             userStatus : user.userStatus
         })
     })

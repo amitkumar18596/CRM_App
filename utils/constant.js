@@ -11,6 +11,6 @@ module.exports = {
     userStatus : {
         pending : "PENDING",
         approved : "APPROVED",
-        pending : "PENDING"
+        rejected : "REJECTED"
     }
 }

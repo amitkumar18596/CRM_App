@@ -36,3 +36,21 @@ exports.findAll = async (req, res) =>{
         })
     }
 }
+
+/**
+ * This method will return the user details based on the id
+ */
+exports.findByUserID = async(req, res) =>{
+    try{
+        const user = await User.find({userId : req.params.id}) // it will return an array
+        // user validation would have happened in moddleware itself
+        return res.status(200).send(ObjectConverter.userResponse(user))
+    }catch(err){
+        console.log('Error while searching the user',err);
+        return res.status(500).send({
+            message : 'Internal server error'
+        })
+    }
+
+
+}

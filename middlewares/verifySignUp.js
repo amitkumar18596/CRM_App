@@ -50,7 +50,7 @@ const validateSignUpRequestBody = async (req, res, next) =>{
 
     if (!isValidEmail (req.body.email)) {
         return res.status(400).send({
-            message : 'email is not valid at a;;'
+            message : 'email is not valid '
         })
     }
 

@@ -2,7 +2,7 @@
 const User = require('../models/user.model')
 const constants = require('../utils/constant')
 
-validateSignUpRequestBody = async (req, res, next) =>{
+const validateSignUpRequestBody = async (req, res, next) =>{
     // validate if name is present
     if (!req.body.name){
         return res.status(400).send({
@@ -72,7 +72,7 @@ validateSignUpRequestBody = async (req, res, next) =>{
     const userTypes = [constants.userTypes.engineer, constants.userTypes.customer]
     if(!userTypes.includes(req.body.userType)){
         return res.status(400).send({
-            message : 'Usertype provided i s not correct. Possible correct values are : Customer, Engineer'
+            message : 'Usertype provided is not correct. Possible correct values are : Customer, Engineer'
         })
     }
 
@@ -83,7 +83,7 @@ const isValidEmail = (email) =>{
     return String(email).toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
 }
 
-validateSignInRequestBody = (req, res, next) =>{
+const validateSignInRequestBody = (req, res, next) =>{
     // Validate if userid is given
     if (!req.body.userId){
         return res.status(400).send({

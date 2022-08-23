@@ -90,6 +90,15 @@ exports.signin = async (req, res)=>{
         })
     }
 
+    /**
+     * check if user is in pending state, then don't login
+     */
+    if(user.userStatus == constants.userStatus.pending){
+        return res.status(400).send({
+            message : 'Failed : Not yet approved from the admin. Get the status approved by admin to login'
+        })
+    }
+
     // create JWT token
     const token = jwt.sign({
         id : user.userId

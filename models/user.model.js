@@ -47,6 +47,15 @@ const userSchema = new mongoose.Schema({
         required : true,
         default : constants.userStatus.approved,
         enum : [constants.userStatus.approved, constants.userStatus.pending, constants.userStatus.rejected]
+    },
+    // user created which ticket will be stored in user model via referencing from ticket model
+    ticketsCreated : {   //Referencing
+        type : [mongoose.SchemaTypes.ObjectId],
+        ref : "Ticket"
+    },
+    ticketsAssigned : {
+        type : [mongoose.SchemaTypes.ObjectId],
+        ref : "Ticket"
     }
 })
 

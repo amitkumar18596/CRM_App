@@ -54,3 +54,26 @@ exports.findByUserID = async(req, res) =>{
 
 
 }
+
+//update few attribute 
+exports.update = async(req, res) =>{
+    try{
+        const user = await User.findOne({userId : req.params.id})
+        user.userStatus = req.body.userStatus ? req.body.userStatus : user.userStatus
+        user.name = req.body.name ? req.body.name : user.name
+        user.userType = req.body.userType ? req.body.userType : user.userType
+        const updatedUser = await user.save()
+        res.status(200).send({
+            name : updatedUser.name,
+            userid : updatedUser.userId,
+            email : updatedUser.email,
+            userType : updatedUser.userType,
+            userStatus : updatedUser.userStatus
+        })
+    }catch(e){
+        console.log('Error while DB operation ', e.message)
+        return res.status(500).send({
+            message : 'Internal server error'
+        })
+    }
+}

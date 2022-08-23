@@ -38,8 +38,8 @@ const userSchema = new mongoose.Schema({
     userType : {
         type : String,
         required : true,
-        default : constants.userTypes.customer,
-        enum : [constants.userTypes.customer, constants.userTypes.admin, constants.userTypes.engineer]
+        default : constants.userType.customer,
+        enum : [constants.userType.customer, constants.userType.admin, constants.userType.engineer]
         // eum is used when a variable has fixed amount of values
     },
     userStatus : {

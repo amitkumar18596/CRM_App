@@ -32,7 +32,7 @@ res -> what we retrn from server
 
 exports.signup = async (req, res)=>{
     // I need to read data from the request body
-    if(req.body.userType != constants.userTypes.customer){
+    if(req.body.userType != constants.userType.customer){
         req.body.userStatus = constants.userStatus.pending
     }
 

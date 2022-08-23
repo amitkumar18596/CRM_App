@@ -37,7 +37,7 @@ const verifyToken = (req,res, next) =>{
 const isAdmin = async(req, res, next) =>{
     const user = await User.findOne({userId : req.userId})
 
-    if(user && user.userType == constants.userTypes.admin) {
+    if(user && user.userType == constants.userType.admin) {
         next()
     }else{
         res.status(403).send({
@@ -76,7 +76,7 @@ const isAdminOrOwner = async(req, res, next) =>{
      try{
         const callingUser = await User.findOne({userId : req.userId}) // get the user from Database
 
-        if(callingUser.userType == constants.userTypes.admin || callingUser.userId == req.params.id){
+        if(callingUser.userType == constants.userType.admin || callingUser.userId == req.params.id){
             next()
         }else{
             res.status(403).send({

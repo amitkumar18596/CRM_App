@@ -63,14 +63,14 @@ const validateSignUpRequestBody = async (req, res, next) =>{
         })
     }
 
-    if (req.body.userType == constants.userTypes.admin){
+    if (req.body.userType == constants.userType.admin){
         return res.status(400).send({
             message : 'Admin can not be passed'
         })
     }
 
-    const userTypes = [constants.userTypes.engineer, constants.userTypes.customer]
-    if(!userTypes.includes(req.body.userType)){
+    const userType = [constants.userType.engineer, constants.userType.customer]
+    if(!userType.includes(req.body.userType)){
         return res.status(400).send({
             message : 'Usertype provided is not correct. Possible correct values are : Customer, Engineer'
         })

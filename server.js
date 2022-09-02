@@ -53,6 +53,7 @@ async function init(){
 // We need to connect router to server
 require('./routes/auth.route')(app) // This registers auth with routr
 require('./routes/user.route')(app)
+require('./routes/ticket.route')(app)
 
 app.listen(serverConfig.PORT, () =>{
     console.log('App is running on port ', serverConfig.PORT);

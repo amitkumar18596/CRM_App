@@ -121,3 +121,30 @@ exports.getAllTickets = async(req, res) =>{
 
     res.status(200).send(tickets)
 }
+
+/**
+ * Write controller function to updating tickets
+ */
+
+exports.updateTicket = async(req, res) =>{
+    try{
+        const ticket = await Ticket.findOne({"_id" : req.params.id})
+
+    /**
+     * Update the ticket object based on the request body passed
+     */
+    ticket.title = req.body.title != undefined ? req.body.title : ticket.title
+    ticket.description = req.body.description != undefined ? req.body.description : ticket.description
+    ticket.ticketPriority = req.body.ticketPriority != undefined ? req.body.ticketPriority : ticket.ticketPriority
+    ticket.status = req.body.status != undefined ? req.body.status : ticket.status
+    ticket.assignee = req.body.assignee != undefined ? req.body.assignee : ticket.assignee
+
+    const updatedTicket = await ticket.save()
+    res.status(201).send(updatedTicket)
+
+    }catch(e){
+        res.status(400).send({
+            message : 'Internal server error'
+        })
+    }
+}

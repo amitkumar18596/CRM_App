@@ -78,3 +78,46 @@ exports.createTicket = async (req, res)=>{
     }
     
 }
+
+/**
+ * Getting all the tickets
+ */
+
+exports.getAllTickets = async(req, res) =>{
+    /**
+     * We need to find the userType 
+     * and depending upon userType we need to frame the search query
+     */
+    const user = await User.findOne({userId : req.userId})
+    const queryObj = {}
+    const ticketsCreated = user.ticketsCreated // This is an array of ticket_id
+    const ticketsAssigned = user.ticketsAssigned
+
+    if(user.userType == constants.userType.customer){
+        /**
+         * query for fetching for all the tickets created by the user
+         */
+
+        if(!ticketsCreated){
+            return res.status(200).send({
+                message : "No tickets created by user yet"
+            })
+        }
+        queryObj["_id"] = { $in : ticketsCreated}
+
+        //console.log(queryObj);
+
+    }else if(user.userType == constants.userType.engineer){
+        /**
+         * Query object for fetching all the tickets assigned/created to a user
+         */
+
+        queryObj["$or"] = [{"_id" : { $in : ticketsCreated}}, {"_id" : { $in : ticketsAssigned}}]
+
+        //console.log(queryObj);
+    }
+
+    const tickets = await Ticket.find(queryObj)
+
+    res.status(200).send(tickets)
+}

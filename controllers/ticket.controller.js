@@ -13,10 +13,13 @@
  * 
  * 3. After the ticket is ctrated, ensurethe engineer and customer documents are also updated
  * 
+ * 4. Send the email after ticket is created to all the stake holders
+ * 
  */
 const constants = require('../utils/constant')
 const Ticket = require('../models/ticket.model')
 const User = require('../models/user.model')
+const sendNotificationReq = require('../utils/notificationClient')
 
 exports.createTicket = async (req, res)=>{
     try{
@@ -66,6 +69,10 @@ exports.createTicket = async (req, res)=>{
             engineer.ticketsAssigned.push(ticketCreated._id)
             await engineer.save()
         }
+
+        // Now we should send the notification req to ntification service
+        sendNotificationReq(`Ticket created with id : ${ticketCreated._id}`, "Ticket created", `${customer.email}, ${engineer.email}, maharana.amit@gmail.com`, 'CRM APP')
+
         res.status(201).send(ticketCreated)
 
     }

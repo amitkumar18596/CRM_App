@@ -21,7 +21,7 @@ db.on('error',() =>{ // On will listen to error event
 })
 db.once('open', ()=>{ // once will listen to success event
     console.log('Connected to mongoDB');
-    init()
+    //init()
 })
 
 // create ADMIN user at boot time
@@ -55,6 +55,9 @@ require('./routes/auth.route')(app) // This registers auth with routr
 require('./routes/user.route')(app)
 require('./routes/ticket.route')(app)
 
-app.listen(serverConfig.PORT, () =>{
+/**
+ * module.exports , sothat it can be used for testing
+ */
+module.exports = app.listen(serverConfig.PORT, () =>{
     console.log('App is running on port ', serverConfig.PORT);
 })

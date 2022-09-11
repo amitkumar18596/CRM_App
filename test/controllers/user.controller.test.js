@@ -122,3 +122,7 @@ describe("Test findAll method", ()=>{
         })
     })
 })
+
+/**
+ * Test case for update scenario
+ */

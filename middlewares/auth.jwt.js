@@ -60,7 +60,7 @@ const isValidUserIdInRequestParam = (req, res, next) =>{
             })
         }
         next()
-    }catch(e){
+    }catch(err){
         console.log('Error while reading teh user info', err.message)
         return res.status(500).send({
             message : 'Internal error while reading the user data'
@@ -84,7 +84,7 @@ const isAdminOrOwner = async(req, res, next) =>{
             })
         }
             
-    }catch(e){
+    }catch(err){
         console.log('Error while reading teh user info', err.message)
         return res.status(500).send({
             message : 'Internal error while reading the user data'
